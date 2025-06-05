@@ -1,5 +1,6 @@
 import { Book, ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { AccountDropdown } from "./account/AccountDropdown";
 
 export default function NavBar() {
   return (
@@ -43,12 +44,7 @@ export default function NavBar() {
             Comprar
           </Link>
 
-          <a
-            href="#"
-            className="inline-flex items-center rounded-md bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 text-sm font-medium ml-6"
-          >
-            Mi cuenta
-          </a>
+          <AccountDropdown />
         </div>
       </div>
     </nav>
