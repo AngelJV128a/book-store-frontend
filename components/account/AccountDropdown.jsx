@@ -13,24 +13,24 @@ export function AccountDropdown() {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="ml-6 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 bg-gray-800"
+          className="ml-6 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 bg-gray-800 cursor-pointer rounded-lg"
         >
           Mi cuenta
         </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-48">
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           Perfil
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           Mis compras
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           Configuraciones
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
           Cerrar sesión
         </DropdownMenuItem>
       </DropdownMenuContent>
