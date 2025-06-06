@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 
-const protectedRoutes = ["/posts", "/Users", "/Settings"];
+const protectedRoutes = ["/","/posts", "/Users", "/Settings"];
 const adminOnlyRoutes = ["/Users", "/Settings", "/posts/admin"];
 
 function decodeJWT(token) {
@@ -43,5 +43,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/posts/:path*", "/Users/:path*", "/Settings/:path*"],
+  matcher: ["/","/books/:path*","/authors/:path","/editorials/:path", "/Users/:path*", "/Settings/:path*"],
 };

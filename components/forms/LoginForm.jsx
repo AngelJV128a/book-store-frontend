@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { useForm } from 'react-hook-form'
-import Link from 'next/link'
+import { useForm } from "react-hook-form";
+import Link from "next/link";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,19 +19,54 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
+} from "@/components/ui/form";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
+    const router = useRouter();
+
   const form = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
-  })
+  });
 
   const onSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+          data
+        );
+
+        const json = response.data;
+        console.log(json);
+        Swal.fire({
+          title: "¡Sesión iniciada!",
+          text: "Ahora puedes acceder a tu cuenta.",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+        Cookies.set("token", data.access_token, { expires: 1 / 24 });
+        router.push("/");
+      } catch (error) {
+        Swal.fire({
+          title: "Error al iniciar sesión",
+          text: "Verifica tus credenciales e inténtalo de nuevo.",
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+        /*         console.error('Error al iniciar sesión:', error); */
+      }
+    };
+
+    fetchData();
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-muted px-4">
@@ -48,10 +83,10 @@ export default function LoginForm() {
                 control={form.control}
                 name="email"
                 rules={{
-                  required: 'Este campo es obligatorio',
+                  required: "Este campo es obligatorio",
                   pattern: {
                     value: /^\S+@\S+$/i,
-                    message: 'Correo inválido',
+                    message: "Correo inválido",
                   },
                 }}
                 render={({ field }) => (
@@ -74,10 +109,10 @@ export default function LoginForm() {
                 control={form.control}
                 name="password"
                 rules={{
-                  required: 'Este campo es obligatorio',
+                  required: "Este campo es obligatorio",
                   minLength: {
                     value: 6,
-                    message: 'Debe tener al menos 6 caracteres',
+                    message: "Debe tener al menos 6 caracteres",
                   },
                 }}
                 render={({ field }) => (
@@ -102,7 +137,7 @@ export default function LoginForm() {
                 Iniciar sesión
               </Button>
               <p className="text-sm text-muted-foreground text-center">
-                ¿No tienes cuenta?{' '}
+                ¿No tienes cuenta?{" "}
                 <Link href="/register" className="text-primary hover:underline">
                   Regístrate
                 </Link>
@@ -112,5 +147,5 @@ export default function LoginForm() {
         </Form>
       </Card>
     </div>
-  )
+  );
 }

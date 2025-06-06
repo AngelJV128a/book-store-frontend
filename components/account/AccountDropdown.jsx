@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -6,8 +7,16 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export function AccountDropdown() {
+
+  const router = useRouter();
+  const handleLogout = () => {
+    Cookies.remove("token");
+    router.push("/login");
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -30,7 +39,7 @@ export function AccountDropdown() {
           Configuraciones
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
           Cerrar sesión
         </DropdownMenuItem>
       </DropdownMenuContent>
