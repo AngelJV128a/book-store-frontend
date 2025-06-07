@@ -9,13 +9,13 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export default function CardBook({ index }) {
+export default function CardBook({ book }) {
   return (
     <>
-      <Card key={index} className="w-full max-w-xs transform transition-transform duration-300 hover:scale-115">
+      <Card key={book.id} className="w-full max-w-xs transform transition-transform duration-300 hover:scale-115">
         <CardHeader>
-          <Image
-            src="https://www.gonvill.com.mx/imagenes/9786074/978607453362.JPG"
+          <img
+            src={book.image}
             alt="Portada del libro"
             width={300}
             height={240}
@@ -24,12 +24,12 @@ export default function CardBook({ index }) {
         </CardHeader>
 
         <CardContent className="space-y-2">
-          <CardTitle className="text-lg">Libro #{index + 1}</CardTitle>
+          <CardTitle className="text-lg">{book.title}</CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
-            Autor: Juan Pérez
+            Autor: {book.author.name + " " + book.author.last_name}
           </CardDescription>
           <CardDescription className="text-sm text-muted-foreground">
-            Editorial: Editorial Ejemplo
+            Editorial: {book.editorial.name}
           </CardDescription>
         </CardContent>
 

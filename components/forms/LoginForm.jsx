@@ -52,7 +52,7 @@ export default function LoginForm() {
           icon: "success",
           confirmButtonText: "Aceptar",
         });
-        Cookies.set("token", data.access_token, { expires: 1 / 24 });
+        Cookies.set("token", json.access_token, { expires: 1 / 24 });
         router.push("/");
       } catch (error) {
         Swal.fire({
