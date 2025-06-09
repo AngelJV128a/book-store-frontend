@@ -1,4 +1,4 @@
-import { Book, ShoppingCart } from "lucide-react";
+import { Book, Home, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { AccountDropdown } from "./account/AccountDropdown";
 

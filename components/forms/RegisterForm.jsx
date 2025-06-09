@@ -20,6 +20,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useEffect } from "react";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -29,11 +30,41 @@ export default function RegisterForm() {
       name: "",
       email: "",
       password: "",
+      password_confirmation: "",
     },
   });
   const onSubmit = (data) => {
     console.log(data);
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+          data
+        );
+        console.log(response);
+        if (response.status === 200 || response.status === 201) {
+          Swal.fire({
+            title: "Registro exitoso",
+            text: "Gracias por registrarte",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          });
+          router.push("/login");
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "No se pudo registrarte",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   };
+
   return (
     <>
       <div className="flex justify-center items-center min-h-screen bg-muted px-4">
@@ -102,6 +133,36 @@ export default function RegisterForm() {
                       <FormControl>
                         <Input
                           id="password"
+                          type="password"
+                          placeholder="••••••••"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password_confirmation"
+                  rules={{
+                    required: "Este campo es obligatorio",
+                    minLength: {
+                      value: 6,
+                      message: "Debe tener al menos 6 caracteres",
+                    },
+                    validate: (value) =>
+                      value === form.getValues("password") ||
+                      "Las contraseñas no coinciden",
+                  }}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="password_confirmation">
+                        Confirma contraseña
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          id="password_confirmation"
                           type="password"
                           placeholder="••••••••"
                           {...field}

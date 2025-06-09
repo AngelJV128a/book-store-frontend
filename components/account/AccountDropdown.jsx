@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { UserCircle } from "lucide-react";
 
 export function AccountDropdown() {
 
@@ -24,6 +25,7 @@ export function AccountDropdown() {
           variant="ghost"
           className="ml-6 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 bg-gray-800 cursor-pointer rounded-lg"
         >
+          <UserCircle className="h-10 w-10" />
           Mi cuenta
         </Button>
       </DropdownMenuTrigger>
