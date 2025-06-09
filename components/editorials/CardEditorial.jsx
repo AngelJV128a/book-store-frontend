@@ -1,11 +1,11 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "../ui/card";
 
-export default function CardEditorial() {
+export default function CardEditorial({editorial}) {
   return (
     <>
       <Card
-        key={1}
+        key={editorial.id}
         className="max-w-3xl  items-start gap-6 p-4 transform transition-transform duration-300 hover:scale-105"
       >
         <div className="flex items-start">
@@ -20,12 +20,12 @@ export default function CardEditorial() {
 
           <CardContent className="flex flex-col ml-6 p-0">
             <CardTitle className="text-xl">
-              {"nombre del editorial"}
+              {editorial.name}
             </CardTitle>
             <CardDescription className="text-sm text-muted-foreground">
-              {"pais de la editorial"}
+              {editorial.country}
               <br />
-              {"website"}
+              {editorial.website}
             </CardDescription>
           </CardContent>
         </div>

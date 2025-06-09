@@ -54,9 +54,6 @@ export default function PageBooks() {
         <h1 className="text-2xl font-bold mb-4">Books</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
-{/*           {[...Array(8)].map((_, index) => (
-            <CardBook key={index} index={index} />
-          ))} */}
           {books.map((book) => (
             <CardBook key={book.id} book={book} />
           ))}
