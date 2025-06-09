@@ -134,7 +134,7 @@ export default function LoginForm() {
 
             <CardFooter className="flex flex-col gap-3 mt-4">
               <Button type="submit" className="w-full">
-                Iniciar sesión
+               Iniciar sesion
               </Button>
               <p className="text-sm text-muted-foreground text-center">
                 ¿No tienes cuenta?{" "}

@@ -66,7 +66,7 @@ export default function BookCarousel() {
     fetchData();
   }, []);
 
-  useEffect(() => {
+/*    useEffect(() => {
     const interval = setInterval(() => {
       if (instanceRef.current) {
         instanceRef.current.next();
@@ -74,7 +74,7 @@ export default function BookCarousel() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [instanceRef]);
+  }, [instanceRef]);  */
 
   return (
     <div className="px-4 py-8">
