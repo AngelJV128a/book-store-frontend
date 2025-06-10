@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-
+import Link from "next/link";
 export default function CardBook({ book }) {
   return (
     <>
@@ -34,7 +34,9 @@ export default function CardBook({ book }) {
         </CardContent>
 
         <CardFooter>
+          <Link href={`/books/${book.id}`}>
           <Button className="w-full cursor-pointer">Ver detalles</Button>
+          </Link>
         </CardFooter>
       </Card>
     </>

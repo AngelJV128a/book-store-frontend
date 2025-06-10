@@ -3,7 +3,7 @@
 import CardBook from "@/components/books/CardBook";
 import { Button } from "@/components/ui/button";
 import ReactPaginate from "react-paginate";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -50,6 +50,7 @@ export default function PageBooks() {
 
   return (
     <>
+    <Suspense fallback={<p>Loading feed...</p>}>
       <div className="flex flex-col items-center px-4">
         <h1 className="text-2xl font-bold mb-4">Books</h1>
 
@@ -72,6 +73,7 @@ export default function PageBooks() {
           renderOnZeroPageCount={null}
         />
       </div>
+      </Suspense>
     </>
   );
 }
