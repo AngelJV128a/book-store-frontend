@@ -64,7 +64,7 @@ export default function BookDetail(props) {
             <p className="text-sm text-foreground">{book.description}</p>
           </div>
 
-          <Button className="mt-4"><ShoppingCartIcon/>Comprar ahora</Button>
+          <Button className="mt-4 cursor-pointer"><ShoppingCartIcon/>Comprar ahora</Button>
         </div>
       </CardContent>
     </Card>

@@ -1,7 +1,9 @@
 "use client";
 import BookDetail from "@/components/books/BookDetails";
+import { BookCardSkeleton } from "@/components/ui/bookCardSkeleton";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Book } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -36,7 +38,7 @@ export default function DetailsBook() {
   }, []);
 
   if (book.id === undefined) {
-    return <div>Cargando...</div>;
+    return <BookCardSkeleton />;
   }
 
   return (

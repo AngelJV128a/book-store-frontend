@@ -1,17 +1,18 @@
 "use client";
 import CardAuthor from "@/components/authors/CardAuthor";
-import { Card } from "@/components/ui/card";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { Button } from "@/components/ui/button";
+import { AuthorCardSkeleton } from "@/components/ui/authorCardSkeleton";
 
 export default function PageAuthors() {
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +33,7 @@ export default function PageAuthors() {
         console.log(json);
         setTotalPages(json.last_page);
         setAuthors(json.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
         Swal.fire({
@@ -55,9 +57,13 @@ export default function PageAuthors() {
         <h1 className="text-2xl font-bold mb-4">Authors</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-8/9">
-          {authors.map((author) => (
-            <CardAuthor key={author.id} author={author} />
-          ))}
+          {loading
+            ? // Renderiza skeletons mientras carga
+              Array.from({ length: 10 }).map((_, i) => (
+                <AuthorCardSkeleton key={i} className="w-64 h-40 rounded-md" />
+              ))
+            : // Renderiza los cards cuando ya tienes datos
+              authors.map((author) => <CardAuthor key={author.id} author={author} />)}
         </div>
         <ReactPaginate
           breakLabel="..."

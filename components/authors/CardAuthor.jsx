@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function CardAuthor({ author }) {
   return (
@@ -26,14 +27,18 @@ export default function CardAuthor({ author }) {
         </div>
 
         <CardContent className="flex flex-col ml-6 p-0">
-          <CardTitle className="text-xl">{author.name + " " + author.last_name}</CardTitle>
+          <CardTitle className="text-xl">
+            {author.name + " " + author.last_name}
+          </CardTitle>
           <CardDescription className="text-sm text-muted-foreground">
             {author.nationality}
           </CardDescription>
         </CardContent>
       </div>
       <CardFooter className="ml-auto p-0">
-        <Button className="cursor-pointer">Ver Libros </Button>
+        <Button className="cursor-pointer">
+          <Link href={`/authors/${author.id}`}>Ver Libros </Link>
+        </Button>
       </CardFooter>
     </Card>
   );
