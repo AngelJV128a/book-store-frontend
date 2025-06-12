@@ -1,7 +1,14 @@
+import Link from "next/link";
 import { Button } from "../ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "../ui/card";
 
-export default function CardEditorial({editorial}) {
+export default function CardEditorial({ editorial }) {
   return (
     <>
       <Card
@@ -19,9 +26,7 @@ export default function CardEditorial({editorial}) {
           </div>
 
           <CardContent className="flex flex-col ml-6 p-0">
-            <CardTitle className="text-xl">
-              {editorial.name}
-            </CardTitle>
+            <CardTitle className="text-xl">{editorial.name}</CardTitle>
             <CardDescription className="text-sm text-muted-foreground">
               {editorial.country}
               <br />
@@ -30,7 +35,9 @@ export default function CardEditorial({editorial}) {
           </CardContent>
         </div>
         <CardFooter className="ml-auto p-0">
-          <Button className="cursor-pointer">Ver Libros </Button>
+          <Button className="cursor-pointer">
+            <Link href={`/editorials/${editorial.id}`}>Ver Libros </Link>
+          </Button>
         </CardFooter>
       </Card>
     </>
