@@ -41,7 +41,7 @@ export default function NavBar() {
             className="inline-flex items-center rounded-md bg-gray-800 text-gray-300 hover:text-white hover:bg-gray-700 px-3 py-2 text-sm font-medium"
           >
             <ShoppingCart className="w-5 h-5 mr-2" />
-            Comprar
+            Carrito
           </Link>
 
           <AccountDropdown />

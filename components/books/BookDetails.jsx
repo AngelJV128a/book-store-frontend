@@ -1,15 +1,24 @@
-import { GlobeIcon,BookIcon,BookOpenIcon,ShoppingCartIcon } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+"use client";
+import {
+  GlobeIcon,
+  BookIcon,
+  BookOpenIcon,
+  ShoppingCartIcon,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useShoppingCart } from "@/store/shoppingCart";
+import { toast, Toaster } from "sonner";
 
 export default function BookDetail(props) {
-  const {
-    book
-  } = props
+  const { book } = props;
+
+  const addItem = useShoppingCart((state) => state.addItem);
 
   return (
     <Card className="max-w-4xl mx-auto p-6 mt-8">
+      <Toaster />
       <CardContent className="grid md:grid-cols-3 gap-6">
         <div className="md:col-span-1">
           <img
@@ -26,12 +35,17 @@ export default function BookDetail(props) {
           </div>
 
           <p className="text-muted-foreground">
-            Autor: <span className="font-medium text-foreground">{book.author.name + " " + book.author.last_name }</span>
+            Autor:{" "}
+            <span className="font-medium text-foreground">
+              {book.author.name + " " + book.author.last_name}
+            </span>
           </p>
 
           <p className="text-muted-foreground">
             Editorial:{" "}
-            <span className="font-medium text-foreground">{book.editorial.name}</span>{" "}
+            <span className="font-medium text-foreground">
+              {book.editorial.name}
+            </span>{" "}
             <a
               href={book.editorial.website}
               target="_blank"
@@ -44,7 +58,8 @@ export default function BookDetail(props) {
           </p>
 
           <p className="text-muted-foreground">
-            Precio: <span className="font-medium text-foreground">{book.price}</span>
+            Precio:{" "}
+            <span className="font-medium text-foreground">{book.price}</span>
           </p>
           <p className="text-muted-foreground">
             ISBN: <span className="font-mono">{book.isbn}</span>
@@ -53,7 +68,8 @@ export default function BookDetail(props) {
             Idioma: <span className="font-medium">{book.language}</span>
           </p>
           <p className="text-muted-foreground">
-            Lanzamiento: <span className="font-medium">{book.release_date}</span>
+            Lanzamiento:{" "}
+            <span className="font-medium">{book.release_date}</span>
           </p>
           <p className="text-muted-foreground">
             Categoría: <Badge variant="secondary">{book.category.name}</Badge>
@@ -64,9 +80,20 @@ export default function BookDetail(props) {
             <p className="text-sm text-foreground">{book.description}</p>
           </div>
 
-          <Button className="mt-4 cursor-pointer"><ShoppingCartIcon/>Comprar ahora</Button>
+          <Button
+            className="mt-4 cursor-pointer"
+            onClick={() => {
+              addItem(book);
+              toast("Producto agregado", {
+                description: `"${book.title}" se agregó al carrito.`,
+              });
+            }}
+          >
+            <ShoppingCartIcon />
+            Agregar al carrito
+          </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 export default function DetailsAuthor() {
   const params = useParams();
   const [books, setBooks] = useState({});
+  const [authors, setAuthors] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function DetailsAuthor() {
         const json = response.data;
         console.log(json.books.data);
         setBooks(json.books.data);
+        setAuthors(json.authorName);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -37,7 +39,7 @@ export default function DetailsAuthor() {
   return (
     <>
       <div className="flex flex-col items-center px-4">
-        <h1 className="text-2xl font-bold mb-4">Libros del autor: </h1>
+        <h1 className="text-2xl font-bold mb-4">Libros del autor: {loading ? "" : authors}</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
           {loading

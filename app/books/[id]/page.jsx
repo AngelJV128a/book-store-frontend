@@ -32,7 +32,7 @@ export default function DetailsBook() {
         console.log(json);
         setBook(json.book);
         setBooks(json.related_books.data);
-        console.log(json.related_books.data);
+/*         console.log(json.related_books.data); */
       } catch (error) {
         console.log(error);
       }
